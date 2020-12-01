@@ -53,8 +53,13 @@ function generateQuestion() {
     
     currentQuestion.choices.forEach(function(options) {
     console.log(options);
-    let tempButton = document.createElement('button').textcontent = options;
-        // console.log(testFunctionLog);
+    let node = document.createElement('button');
+    let textnode = document.createTextNode(options);
+        node.appendChild(textnode);
+    let setValue = document.getElementById('question-zone').appendChild(node);
+        setValue.setAttribute('value', options);
+        console.log(setValue);
+    
     })
     
    
