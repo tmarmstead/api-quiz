@@ -1,0 +1,11 @@
+#high-scores {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+#current-time {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
