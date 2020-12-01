@@ -25,15 +25,15 @@ startButtonEl.onclick = startQuiz;
 
 // declare initial variable
 let timerId;
-let timeRemaining = 10;
+let timeRemaining = 3;
 let questionIndex = 0;
 
 
 let questions = [
     {
-        title: 'What is 1 + 1',
-        choices: [1, 2, 3, 4],
-        answer: 2
+        title: 'What is our home planet',
+        choices: ['Earth', 'Mars', 'Jupiter', 'Sun'],
+        answer: 'Earth'
     },
     {
         title: 'What is our home planet',
@@ -58,7 +58,12 @@ function generateQuestion() {
         node.appendChild(textnode);
     let setValue = document.getElementById('question-zone').appendChild(node);
         setValue.setAttribute('value', options);
-        console.log(setValue);
+        
+        
+       node.addEventListener('click', function() {
+            validateAnswer();
+            console.log("I was clicked");
+        });
     
     })
     
@@ -77,10 +82,26 @@ function generateQuestion() {
 }
 
 function validateAnswer() {
-
+    
     let userAnswer = this.value;
-    let correctAnswer = question[questionIndex].answer;
+    let correctAnswer = questions[questionIndex].answer;
+    console.log(correctAnswer);
     // Check if user clicked the correct button
+    // If right 
+
+            // Display Correct
+
+        // questionIndex++;
+        // if (questionIndex === questions.length) 
+            // end game
+            // else 
+            // generfateQUestions()
+    if (userAnswer === correctAnswer) {
+        let gotItRight = document.createElement('p');
+        let showIfRight = document.createTextNode('Correct!');
+        let displayMessage = gotItRight.appendChild(showIfRight);
+    }
+    
 
         // If wrong
 
@@ -111,6 +132,8 @@ function clockTick(){
     if (timeRemaining < 1) {
         clearInterval(timerId);
         currentTimeEl.textContent = 'Time\'s Up!'
+        questionZoneEl.style.display = 'none';
+        endScreenEl.style.display = '';
     }
 }
 
