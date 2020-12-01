@@ -1,22 +1,34 @@
 // Gran elements from html
 let startScreenEl = document.getElementById('start-screen');
-let questionZoneEl = document.querySelector('#question-zone');
-let endScreenEl = document.querySelector('#end-screen');
+let questionZoneEl = document.getElementById('question-zone');
+let endScreenEl = document.getElementById('end-screen');
 let currentTimeEl = document.getElementById('current-time');
 let startButtonEl = document.getElementById('start-quiz');
-let questionTitleEl = document.querySelector('#question-title');
-let choicesEl = document.querySelector('#choices')
-let correctIncorrectEl = document.querySelector('#correct-incorrect');
-
+let questionTitleEl = document.getElementById('question-title');
+let choicesEl = document.getElementById('choices')
+let correctIncorrectEl = document.getElementById('correct-incorrect');
 
 // Hiding blocks b & c, allowing block a to be visible
 questionZoneEl.style.display = 'none';
 endScreenEl.style.display = 'none';
 
+
+// Function to Start Quiz
+function startQuiz() {
+    timerId = setInterval(clockTick, 1000);
+    startScreenEl.style.display = 'none';
+    questionZoneEl.style.display = '';
+    endScreenEl.style.display = 'none';
+    generateQuestion();
+}
+startButtonEl.onclick = startQuiz;
+
 // declare initial variable
 let timerId;
-let timeRemaining = 60;
+let timeRemaining = 10;
 let questionIndex = 0;
+
+
 let questions = [
     {
         title: 'What is 1 + 1',
@@ -38,10 +50,15 @@ let questions = [
 function generateQuestion() {
     let currentQuestion = questions[questionIndex];
     questionTitleEl.textContent = currentQuestion.title;
+    
+    currentQuestion.choices.forEach(function(options) {
+    console.log(options);
+    let tempButton = document.createElement('button').textcontent = options;
+        // console.log(testFunctionLog);
+    })
+    
+   
 
-    // currentQuestion.choices.forEach(function(pizza) {
-
-   // }
     // Create 4 buttons (HINT foreach loop(pizza))
     // let tempBtn = document.createElement('button')
 
@@ -86,15 +103,13 @@ function clockTick(){
     currentTimeEl.textContent = `Time: ${timeRemaining}`;
 
     // if time <0 run quizEnd()
+    if (timeRemaining < 1) {
+        clearInterval(timerId);
+        currentTimeEl.textContent = 'Time\'s Up!'
+    }
 }
 
-function startQuiz() {
-    timerId = setInterval(clockTick, 1000);
-    startScreenEl.style.display = 'none';
-    questionZoneEl.style.display = '';
-    generateQuestion();
-}
-startButtonEl.onclick = startQuiz;
+
 
 
 
