@@ -1,4 +1,4 @@
-// Gran elements from html
+// Grab elements from html
 let startScreenEl = document.getElementById('start-screen');
 let questionZoneEl = document.getElementById('question-zone');
 let endScreenEl = document.getElementById('end-screen');
@@ -23,7 +23,7 @@ function startQuiz() {
 }
 startButtonEl.onclick = startQuiz;
 
-// declare initial variable
+// Declare initial variable
 let timerId;
 let timeRemaining = 3;
 let questionIndex = 0;
@@ -36,9 +36,9 @@ let questions = [
         answer: 'Earth'
     },
     {
-        title: 'What is our home planet',
-        choices: ['Earth', 'Mars', 'Jupiter', 'Sun'],
-        answer: 'Earth'
+        title: 'Which is a vowel?',
+        choices: ['x', 'm', 'e', 'l'],
+        answer: 'e'
     },
     {
         title: 'What is a variable',
@@ -46,7 +46,7 @@ let questions = [
         answer: 'let'
     }
 ];
-
+    // Function to make questions and the relative choice buttons
 function generateQuestion() {
     let currentQuestion = questions[questionIndex];
     questionTitleEl.textContent = currentQuestion.title;
@@ -64,23 +64,11 @@ function generateQuestion() {
             validateAnswer();
             console.log("I was clicked");
         });
-    
+        // click = console.log("right or wrong?");
     })
-    
-   
-
-    // Create 4 buttons (HINT foreach loop(pizza))
-    // let tempBtn = document.createElement('button')
-
-            // display choice on it
-            // .textContent = pizza
-            // add attribute ('value', pizza)
-
-            // btn.onclick = validateAnswer;
-
-            // choicesEL.appendchild(btn)
 }
 
+    // Function to check if user answer is correct or incorrect, then display if user answer is right or wrong
 function validateAnswer() {
     
     let userAnswer = this.value;
@@ -88,40 +76,34 @@ function validateAnswer() {
     console.log(correctAnswer);
     // Check if user clicked the correct button
     // If right 
+            // Display 'Correct'
 
-            // Display Correct
-
-        // questionIndex++;
-        // if (questionIndex === questions.length) 
-            // end game
-            // else 
-            // generfateQUestions()
     if (userAnswer === correctAnswer) {
-        let gotItRight = document.createElement('p');
+        let gotItRight = document.getElementById('is-it-correct');
         let showIfRight = document.createTextNode('Correct!');
         let displayMessage = gotItRight.appendChild(showIfRight);
+        console.log(displayMessage);
     }
+    questionIndex++;
+                
+            // if (questionIndex === questions.length) 
+                // end game
+                // else 
+                // generfateQUestions()
     
 
-        // If wrong
+        // If wrong 
 
             // Timer - 10 seconds
-            // Display: InCorrect in correct-incorrect div
-
-        // If right 
-
-            // Display Correct
-
-        // questionIndex++;
-        // if (questionIndex === questions.length) 
-            // end game
-            // else 
-            // generfateQUestions()
+            // Display: InCorrect in 'correct-incorrect' div       
 }
 
 function quizEnd() {
     // hide A / b
     // Show C
+    startScreenEl.style.display = 'none';
+    questionZoneEl.style.display = 'none';
+    endScreenEl.style.display = '';
 }
 
 function clockTick(){
@@ -136,12 +118,6 @@ function clockTick(){
         endScreenEl.style.display = '';
     }
 }
-
-
-
-
-
-
 
 
 
