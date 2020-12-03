@@ -24,45 +24,44 @@ function startQuiz() {
 startButtonEl.onclick = startQuiz;
 
 // Declare initial variable
-let timerId;
-let timeRemaining = 3;
-let questionIndex = 0;
+        let timerId;
+        let timeRemaining = 15;
+        let questionIndex = 0;
 
 
-let questions = [
-    {
-        title: 'What is our home planet?',
-        choices: ['Earth', 'Mars', 'Jupiter', 'Sun'],
-        answer: 'Earth'
-    },
-    {
-        title: 'Which is a vowel?',
-        choices: ['x', 'm', 'e', 'l'],
-        answer: 'e'
-    },
-    {
-        title: 'What is a variable?',
-        choices: ['let', 'function', 'array', 'object'],
-        answer: 'let'
-    }
-];
+        let questions = [
+            {
+                title: 'What is our home planet?',
+                choices: ['Earth', 'Mars', 'Jupiter', 'Sun'],
+                answer: 'Earth'
+            },
+            {
+                title: 'Which is a vowel?',
+                choices: ['x', 'm', 'e', 'l'],
+                answer: 'e'
+            },
+            {
+                title: 'What is a variable?',
+                choices: ['let', 'function', 'array', 'object'],
+                answer: 'let'
+            }
+        ];
     // Function to make questions and the relative choice buttons
 function generateQuestion() {
-    let currentQuestion = questions[questionIndex];
-    questionTitleEl.textContent = currentQuestion.title;
+        let currentQuestion = questions[questionIndex];
+        questionTitleEl.textContent = currentQuestion.title;
     
-    currentQuestion.choices.forEach(function(options) {
-    console.log(options);
-    let node = document.createElement('button');
-    let textnode = document.createTextNode(options);
+        currentQuestion.choices.forEach(function(options) {
+    // console.log(options);
+        let node = document.createElement('button');
+        let textnode = document.createTextNode(options);
         node.appendChild(textnode);
-    let setValue = document.getElementById('question-zone').appendChild(node);
-        setValue.setAttribute('value', options);
+        let addBttn = document.getElementById('question-zone').appendChild(node);
+        addBttn.setAttribute('value', options);
         
-        
-       node.addEventListener('click', function(event) {
-            validateAnswer(event);
-            console.log("I was clicked");
+        node.addEventListener('click', function(event) {
+        validateAnswer(event);
+        console.log("I was clicked");
         });
         // click = console.log("right or wrong?");
     })
@@ -70,31 +69,39 @@ function generateQuestion() {
 
     // Function to check if user answer is correct or incorrect, then display if user answer is right or wrong
 function validateAnswer(event) {
-    console.log(event.target.value);
-    let userAnswer = event.target.value;
-    let correctAnswer = questions[questionIndex].answer;
-    console.log(correctAnswer);
+        console.log(event.target.value);
+        let userAnswer = event.target.value;
+        let currentQuestion = questions[questionIndex];
+        let correctAnswer = currentQuestion.answer;
+    
     // Check if user clicked the correct button
-    // If right 
+    // If right  
             // Display 'Correct'
 
     if (userAnswer === correctAnswer) {
         let gotItRight = document.getElementById('is-it-correct');
-        let showIfRight = document.createTextNode('Correct!');
-        gotItRight.appendChild(showIfRight);
-        console.log('Yay its right!');
-        console.log(displayMessage);
+        // let showIfRight = document.createTextNode('Correct!');
+        gotItRight.textContent = 'Correct!';
+        generateQuestion(questionIndex++);
+        // let preBttnRemove = document.getElementById('question-zone');
+        // preBttnRemove.removeChild('button');
+        // console.log(preBttnRemove);
     } else {
         let notRight = document.getElementById('is-it-correct');
-        let showIncorrect = document.createTextNode('Incorrect');
-        notRight.appendChild(showIncorrect);
+        // let showIncorrect = document.createTextNode('Incorrect');
+        notRight.textContent = 'Incorrect';
+        
+        generateQuestion(questionIndex++);
+        // notRight.style.display ='';
+        
+        
     }
-    questionIndex++;
                 
             // if (questionIndex === questions.length) 
                 // end game
                 // else 
                 // generfateQUestions()
+
     
 
         // If wrong 
@@ -106,14 +113,14 @@ function validateAnswer(event) {
 function quizEnd() {
     // hide A / b
     // Show C
-    startScreenEl.style.display = 'none';
-    questionZoneEl.style.display = 'none';
-    endScreenEl.style.display = '';
+        startScreenEl.style.display = 'none';
+        questionZoneEl.style.display = 'none';
+        endScreenEl.style.display = '';
 }
 
 function clockTick(){
-    timeRemaining--;
-    currentTimeEl.textContent = `Time: ${timeRemaining}`;
+        timeRemaining--;
+        currentTimeEl.textContent = `Time: ${timeRemaining}`;
 
     // if time <0 run quizEnd()
     if (timeRemaining < 1) {
