@@ -25,50 +25,125 @@ startButtonEl.onclick = startQuiz;
 
 // Declare initial variable
         let timerId;
-        let timeRemaining = 15;
+        let timeRemaining = 60;
         let questionIndex = 0;
 
 
         let questions = [
             {
-                title: 'What is our home planet?',
-                choices: ['Earth', 'Mars', 'Jupiter', 'Sun'],
-                answer: 'Earth'
+                title: 'What character/ characters are used to surround the block of a function?',
+                choices: ['()', '!', '{}', '$'],
+                answer: '{}'
             },
             {
-                title: 'Which is a vowel?',
-                choices: ['x', 'm', 'e', 'l'],
-                answer: 'e'
+                title: 'What is used to print to the console??',
+                choices: ['var', 'function', 'i', 'console.log'],
+                answer: 'console.log'
             },
             {
                 title: 'What is a variable?',
                 choices: ['let', 'function', 'array', 'object'],
                 answer: 'let'
-            }
+            },
+            {
+                title: 'How do you commit changes in your terminal?',
+                choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
+                answer: 'git commit -m'
+            },
+            {
+                title: 'Which of the following is not a programming language?',
+                choices: ['spbl', 'css', 'javascript', 'html'],
+                answer: 'spbl'
+            },
         ];
     // Function to make questions and the relative choice buttons
 function generateQuestion() {
-        let currentQuestion = questions[questionIndex];
-        questionTitleEl.textContent = currentQuestion.title;
     
+    let questions = [
+        {
+            title: 'What character/ characters are used to surround the block of a function?',
+            choices: ['()', '!', '{}', '$'],
+            answer: '{Earth}'
+        },
+        {
+            title: 'What is used to print to the console??',
+            choices: ['var', 'function', 'i', 'console.log'],
+            answer: 'console.log'
+        },
+        {
+            title: 'What is a variable?',
+            choices: ['let', 'function', 'array', 'object'],
+            answer: 'let'
+        },
+        {
+            title: 'How do you commit changes in your terminal?',
+            choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
+            answer: 'git commit -m'
+        },
+        {
+            title: 'Which of the following is not a programming language?',
+            choices: ['spbl', 'css', 'javascript', 'html'],
+            answer: 'spbl'
+        },
+    ];
+        let currentQuestion = questions[questionIndex];
+        if (!currentQuestion) {
+            startScreenEl.style.display = 'none'
+            questionZoneEl.style.display = 'none';
+            endScreenEl.style.display = '';
+        }
+        questionTitleEl.textContent = currentQuestion.title;
+        document.getElementById('choices').innerHTML ='';
         currentQuestion.choices.forEach(function(options) {
-    // console.log(options);
+        // console.log(options);
         let node = document.createElement('button');
         let textnode = document.createTextNode(options);
         node.appendChild(textnode);
-        let addBttn = document.getElementById('question-zone').appendChild(node);
+        let addBttn = document.getElementById('choices').appendChild(node);
         addBttn.setAttribute('value', options);
         
         node.addEventListener('click', function(event) {
         validateAnswer(event);
-        console.log("I was clicked");
+        
+        
+        // console.log("I was clicked");
+        // let removeBttn = addBttn.parentElement.removeChild(removeBttn);
         });
         // click = console.log("right or wrong?");
     })
+   
 }
 
     // Function to check if user answer is correct or incorrect, then display if user answer is right or wrong
 function validateAnswer(event) {
+    
+    let questions = [
+        {
+            title: 'What character/ characters are used to surround the block of a function?',
+            choices: ['()', '!', '{}', '$'],
+            answer: '{Earth}'
+        },
+        {
+            title: 'What is used to print to the console??',
+            choices: ['var', 'function', 'i', 'console.log'],
+            answer: 'console.log'
+        },
+        {
+            title: 'What is a variable?',
+            choices: ['let', 'function', 'array', 'object'],
+            answer: 'let'
+        },
+        {
+            title: 'How do you commit changes in your terminal?',
+            choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
+            answer: 'git commit -m'
+        },
+        {
+            title: 'Which of the following is not a programming language?',
+            choices: ['spbl', 'css', 'javascript', 'html'],
+            answer: 'spbl'
+        },
+    ];
         console.log(event.target.value);
         let userAnswer = event.target.value;
         let currentQuestion = questions[questionIndex];
@@ -77,45 +152,80 @@ function validateAnswer(event) {
     // Check if user clicked the correct button
     // If right  
             // Display 'Correct'
-
-    if (userAnswer === correctAnswer) {
-        let gotItRight = document.getElementById('is-it-correct');
-        // let showIfRight = document.createTextNode('Correct!');
-        gotItRight.textContent = 'Correct!';
-        generateQuestion(questionIndex++);
-        // let preBttnRemove = document.getElementById('question-zone');
+            
+            if (userAnswer === correctAnswer) {
+             let gotItRight = document.getElementById('is-it-correct');
+            // let showIfRight = document.createTextNode('Correct!');
+            gotItRight.textContent = 'Correct!';
+        
+            // let preBttnRemove = document.getElementById('question-zone');
         // preBttnRemove.removeChild('button');
         // console.log(preBttnRemove);
-    } else {
-        let notRight = document.getElementById('is-it-correct');
-        // let showIncorrect = document.createTextNode('Incorrect');
-        notRight.textContent = 'Incorrect';
-        
-        generateQuestion(questionIndex++);
-        // notRight.style.display ='';
-        
-        
+
+            } else {
+             let notRight = document.getElementById('is-it-correct');
+             // let showIncorrect = document.createTextNode('Incorrect');
+            notRight.textContent = 'Incorrect';
+            // notRight.style.display ='';
     }
+    if (currentQuestion === questions.length) {
+        
+        quizEnd(event);
+    } 
+    generateQuestion(questionIndex++);
                 
             // if (questionIndex === questions.length) 
                 // end game
                 // else 
                 // generfateQUestions()
-
-    
-
-        // If wrong 
-
-            // Timer - 10 seconds
-            // Display: InCorrect in 'correct-incorrect' div       
+// function endGameWhenTimerEnds() {
+//             if (currentQuestion === questions.length) {
+//             clearInterval(timerId);
+//             startScreenEl.style.display = 'none';
+//             questionZoneEl.style.display = 'none';
+//             endScreenEl.style.display = '';
+//             quizEnd(event);}
+//             }   
 }
 
+
+//  function to hide correct/incorrect display after buttons are clicked and to hide buttons from previous quesiton
+
+ // If wrong 
+            // Timer - 10 seconds
+            // Display: InCorrect in 'correct-incorrect' div 
 function quizEnd() {
+    
+    let questions = [
+        {
+            title: 'What character/ characters are used to surround the block of a function?',
+            choices: ['()', '!', '{}', '$'],
+            answer: '{Earth}'
+        },
+        {
+            title: 'What is used to print to the console??',
+            choices: ['var', 'function', 'i', 'console.log'],
+            answer: 'console.log'
+        },
+        {
+            title: 'What is a variable?',
+            choices: ['let', 'function', 'array', 'object'],
+            answer: 'let'
+        },
+        {
+            title: 'How do you commit changes in your terminal?',
+            choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
+            answer: 'git commit -m'
+        },
+        {
+            title: 'Which of the following is not a programming language?',
+            choices: ['spbl', 'css', 'javascript', 'html'],
+            answer: 'spbl'
+        },
+    ];
     // hide A / b
     // Show C
-        startScreenEl.style.display = 'none';
-        questionZoneEl.style.display = 'none';
-        endScreenEl.style.display = '';
+          
 }
 
 function clockTick(){
@@ -123,12 +233,16 @@ function clockTick(){
         currentTimeEl.textContent = `Time: ${timeRemaining}`;
 
     // if time <0 run quizEnd()
-    if (timeRemaining < 1) {
-        clearInterval(timerId);
-        currentTimeEl.textContent = 'Time\'s Up!'
-        questionZoneEl.style.display = 'none';
-        endScreenEl.style.display = '';
-    }
+            if (timeRemaining < 1) {
+                clearInterval(timerId);
+                currentTimeEl.textContent = 'Time\'s Up!'
+                questionZoneEl.style.display = 'none';
+                endScreenEl.style.display = '';
+            }
+
+            // if (currentQuestion === questions.length) {
+            //     console.log('end screen after last question');
+            // }
 }
 
 

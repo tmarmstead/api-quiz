@@ -1,16 +1,29 @@
 body {
     font-family: helvetica;
+    background-color: bisque;
 }
 #high-scores {
     position: absolute;
     top: 15px;
-    left: 15px;
+    left: 80px;
+    text-decoration: underline;
+
 }
+
 
 #current-time {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 80px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#rules {
+    border: 4px solid black;
+    padding: 15px;
+    margin-left: 500px;
+    margin-right: 500px;
 }
 
 #start-screen, 
@@ -20,12 +33,11 @@ body {
     margin-top: 100px;
 }
 button {
-    background-color: #4CAF50; 
+    background-color: orange; 
     border: 4px solid black;
-    border-radius: 10%;
     margin: 10px;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -38,11 +50,26 @@ button {
     border-radius: 10%;
     margin: 10px;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
 
-  
+#text-score {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#initials {
+    padding: 9x;
+    margin-top: 5px;
+}
+
+#text-initials {
+    font-weight: bolder;
+}
