@@ -54,7 +54,7 @@ startButtonEl.onclick = startQuiz;
             },
             {
                 title: 'How do you commit changes in your terminal?',
-                choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
+                choices: ['git commit -m', 'git status', 'touch', 'git status'],
                 answer: 'git commit -m'
             },
             {
@@ -105,20 +105,20 @@ function validateAnswer(event) {
              let gotItRight = document.getElementById('is-it-correct');
              gotItRight.textContent = 'Correct!';
              let addToUserScore = score += 10;
-             userScoreEl.textContent = addToUserScore;
+             userScoreEl.textContent = 'Score: ' + addToUserScore;
 
             } else {
              let notRight = document.getElementById('is-it-correct');
              notRight.textContent = 'Incorrect';
              let addToUserScore = score -= 5;
-             userScoreEl.textContent = addToUserScore;
+             userScoreEl.textContent = 'Score: ' + addToUserScore;
              timeRemaining -= 10;      
              
     }
 
     setTimeout(function(){
         generateQuestion(questionIndex++);
-   }, 1000);
+   }, 650);
     
     
 }
