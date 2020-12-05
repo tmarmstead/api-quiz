@@ -25,7 +25,7 @@ startButtonEl.onclick = startQuiz;
 
 // Declare initial variable
         let timerId;
-        let timeRemaining = 60;
+        let timeRemaining = 15;
         let questionIndex = 0;
 
 
@@ -86,12 +86,12 @@ function generateQuestion() {
             answer: 'spbl'
         },
     ];
+        
         let currentQuestion = questions[questionIndex];
         if (!currentQuestion) {
-            startScreenEl.style.display = 'none'
-            questionZoneEl.style.display = 'none';
-            endScreenEl.style.display = '';
+            clockTick();
         }
+    
         questionTitleEl.textContent = currentQuestion.title;
         document.getElementById('choices').innerHTML ='';
         currentQuestion.choices.forEach(function(options) {
@@ -104,10 +104,6 @@ function generateQuestion() {
         
         node.addEventListener('click', function(event) {
         validateAnswer(event);
-        
-        
-        // console.log("I was clicked");
-        // let removeBttn = addBttn.parentElement.removeChild(removeBttn);
         });
         // click = console.log("right or wrong?");
     })
@@ -144,108 +140,61 @@ function validateAnswer(event) {
             answer: 'spbl'
         },
     ];
-        console.log(event.target.value);
+        // console.log(event.target.value);
         let userAnswer = event.target.value;
         let currentQuestion = questions[questionIndex];
         let correctAnswer = currentQuestion.answer;
     
-    // Check if user clicked the correct button
-    // If right  
-            // Display 'Correct'
-            
             if (userAnswer === correctAnswer) {
              let gotItRight = document.getElementById('is-it-correct');
-            // let showIfRight = document.createTextNode('Correct!');
-            gotItRight.textContent = 'Correct!';
-        
-            // let preBttnRemove = document.getElementById('question-zone');
-        // preBttnRemove.removeChild('button');
-        // console.log(preBttnRemove);
+             gotItRight.textContent = 'Previous Question: Correct!';
 
             } else {
              let notRight = document.getElementById('is-it-correct');
-             // let showIncorrect = document.createTextNode('Incorrect');
-            notRight.textContent = 'Incorrect';
-            // notRight.style.display ='';
+             notRight.textContent = 'Previous Question: Incorrect';
+            
+             newTime = `Time: ${timeRemaining - 10}`;
+             currentTimeEl.textContent = newTime--;
     }
-    if (currentQuestion === questions.length) {
-        
-        quizEnd(event);
-    } 
     generateQuestion(questionIndex++);
-                
-            // if (questionIndex === questions.length) 
-                // end game
-                // else 
-                // generfateQUestions()
-// function endGameWhenTimerEnds() {
-//             if (currentQuestion === questions.length) {
-//             clearInterval(timerId);
-//             startScreenEl.style.display = 'none';
-//             questionZoneEl.style.display = 'none';
-//             endScreenEl.style.display = '';
-//             quizEnd(event);}
-//             }   
-}
-
-
-//  function to hide correct/incorrect display after buttons are clicked and to hide buttons from previous quesiton
-
- // If wrong 
-            // Timer - 10 seconds
-            // Display: InCorrect in 'correct-incorrect' div 
-function quizEnd() {
     
-    let questions = [
-        {
-            title: 'What character/ characters are used to surround the block of a function?',
-            choices: ['()', '!', '{}', '$'],
-            answer: '{Earth}'
-        },
-        {
-            title: 'What is used to print to the console??',
-            choices: ['var', 'function', 'i', 'console.log'],
-            answer: 'console.log'
-        },
-        {
-            title: 'What is a variable?',
-            choices: ['let', 'function', 'array', 'object'],
-            answer: 'let'
-        },
-        {
-            title: 'How do you commit changes in your terminal?',
-            choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
-            answer: 'git commit -m'
-        },
-        {
-            title: 'Which of the following is not a programming language?',
-            choices: ['spbl', 'css', 'javascript', 'html'],
-            answer: 'spbl'
-        },
-    ];
-    // hide A / b
-    // Show C
-          
 }
 
 function clockTick(){
         timeRemaining--;
         currentTimeEl.textContent = `Time: ${timeRemaining}`;
-
-    // if time <0 run quizEnd()
             if (timeRemaining < 1) {
                 clearInterval(timerId);
                 currentTimeEl.textContent = 'Time\'s Up!'
                 questionZoneEl.style.display = 'none';
                 endScreenEl.style.display = '';
             }
-
-            // if (currentQuestion === questions.length) {
-            //     console.log('end screen after last question');
-            // }
 }
+// function for local storage
 
+function scoreStorage(){
+    let input = document.getElementById('initials');
+    document.getElementById('submit').addEventListener('click', function(){
+        localStorage.setItem('highscores', input.value);    
+    })
 
+    // document.getElementById('score-initials').textContent = input.value;
+}
+scoreStorage();
+
+function pushToScoresPage(){
+    let scoreBoard = document.getElementById('score-initials');
+    document.getElementById('submit').addEventListener('click', function(){
+        let userInitials = localStorage.getItem('highscores');
+        scoreBoard.textContent = userInitials;
+    })
+}
+pushToScoresPage();    // var input = document.getElementById('initials').addEventListener('click', function(){
+    //     localStorage.setItem('highscores', input.val());
+    // }
+    
+        
+    
 
 
 // // Create elements 

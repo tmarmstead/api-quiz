@@ -20,10 +20,11 @@ body {
 }
 
 #rules {
-    border: 4px solid black;
-    padding: 15px;
-    margin-left: 500px;
+    border: 2px solid black;
+     padding: 15px;
+    /*margin-left: 500px;
     margin-right: 500px;
+    position: relative; */
 }
 
 #start-screen, 
@@ -34,7 +35,7 @@ body {
 }
 button {
     background-color: orange; 
-    border: 4px solid black;
+    border: 2px solid black;
     margin: 10px;
     color: white;
     padding: 10px 15px;
