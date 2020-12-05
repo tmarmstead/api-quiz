@@ -8,6 +8,7 @@ let questionTitleEl = document.getElementById('question-title');
 let choicesEl = document.getElementById('choices')
 let correctIncorrectEl = document.getElementById('correct-incorrect');
 let userScoreEl = document.getElementById('user-score');
+let currentScoreEl = document.getElementById('current-score');
 let isCorrect = document.getElementById('is-it-correct');
 
 // Hiding blocks b & c, allowing block a to be visible
@@ -29,8 +30,10 @@ startButtonEl.onclick = startQuiz;
         let timerId;
         let timeRemaining = 60;
         let questionIndex = 0;
-        let score;
-        let currentScore = 'Current Score: ' + score;
+        let score = 0;
+        let finalScore = userScoreEl;
+        userScoreEl.createTextNode = 'Current Score: ' + score;
+        
 
 
         let questions = [
@@ -96,15 +99,21 @@ function validateAnswer(event) {
         let userAnswer = event.target.value;
         let currentQuestion = questions[questionIndex];
         let correctAnswer = currentQuestion.answer;
+        
     
             if (userAnswer === correctAnswer) {
              let gotItRight = document.getElementById('is-it-correct');
              gotItRight.textContent = 'Correct!';
+             let addToUserScore = score += 10;
+             userScoreEl.textContent = addToUserScore;
 
             } else {
              let notRight = document.getElementById('is-it-correct');
              notRight.textContent = 'Incorrect';
-             timeRemaining -= 10;       
+             let addToUserScore = score -= 5;
+             userScoreEl.textContent = addToUserScore;
+             timeRemaining -= 10;      
+             
     }
 
     setTimeout(function(){
@@ -124,22 +133,35 @@ function clockTick(){
                 endScreenEl.style.display = '';
             }
 }
-// function for local storage
 
-function scoreStorage(){
+
+
+// function finalScore(){
+//     let finalScore = score;
+//     document.getElementById('submit').addEventListener('click', function(){
+//         localStorage.setItem('high-scores', finalScore);
+//         console.log(finalScore);
+//     })
+// }
+
+// function for local storage
+function initialsStorage(){
+    let finalScore = score;
     let input = document.getElementById('initials');
     document.getElementById('submit').addEventListener('click', function(){
-        localStorage.setItem('highscores', input.value);    
+        localStorage.setItem('initials', input.value);    
+        localStorage.setItem('high-scores', finalScore);
+        console.log(finalScore);
     })
 
     // document.getElementById('score-initials').textContent = input.value;
 }
-scoreStorage();
+initialsStorage();
 
 function pushToScoresPage(){
     let scoreBoard = document.getElementById('score-initials');
     document.getElementById('submit').addEventListener('click', function(){
-        let userInitials = localStorage.getItem('highscores');
+        let userInitials = localStorage.getItem('initials');
         scoreBoard.textContent = userInitials;
     })
 }
