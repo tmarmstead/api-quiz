@@ -8,6 +8,7 @@ let questionTitleEl = document.getElementById('question-title');
 let choicesEl = document.getElementById('choices')
 let correctIncorrectEl = document.getElementById('correct-incorrect');
 let userScoreEl = document.getElementById('user-score');
+let isCorrect = document.getElementById('is-it-correct');
 
 // Hiding blocks b & c, allowing block a to be visible
 questionZoneEl.style.display = 'none';
@@ -67,9 +68,9 @@ function generateQuestion() {
             questionZoneEl.style.display = 'none';
             endScreenEl.style.display = '';
             timeRemaining = 0;
-            
-
         }
+
+        isCorrect.textContent = '';
     
         questionTitleEl.textContent = currentQuestion.title;
         document.getElementById('choices').innerHTML ='';
@@ -98,14 +99,18 @@ function validateAnswer(event) {
     
             if (userAnswer === correctAnswer) {
              let gotItRight = document.getElementById('is-it-correct');
-             gotItRight.textContent = 'Previous Question: Correct!';
+             gotItRight.textContent = 'Correct!';
 
             } else {
              let notRight = document.getElementById('is-it-correct');
-             notRight.textContent = 'Previous Question: Incorrect';
+             notRight.textContent = 'Incorrect';
              timeRemaining -= 10;       
     }
-    generateQuestion(questionIndex++);
+
+    setTimeout(function(){
+        generateQuestion(questionIndex++);
+   }, 1000);
+    
     
 }
 
