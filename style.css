@@ -10,6 +10,14 @@ body {
 
 }
 
+#user-score {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+
+
+}
+
 
 #current-time {
     position: absolute;

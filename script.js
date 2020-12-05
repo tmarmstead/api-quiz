@@ -7,6 +7,7 @@ let startButtonEl = document.getElementById('start-quiz');
 let questionTitleEl = document.getElementById('question-title');
 let choicesEl = document.getElementById('choices')
 let correctIncorrectEl = document.getElementById('correct-incorrect');
+let userScoreEl = document.getElementById('user-score');
 
 // Hiding blocks b & c, allowing block a to be visible
 questionZoneEl.style.display = 'none';
@@ -25,8 +26,10 @@ startButtonEl.onclick = startQuiz;
 
 // Declare initial variable
         let timerId;
-        let timeRemaining = 15;
+        let timeRemaining = 60;
         let questionIndex = 0;
+        let score;
+        let currentScore = 'Current Score: ' + score;
 
 
         let questions = [
@@ -58,38 +61,14 @@ startButtonEl.onclick = startQuiz;
         ];
     // Function to make questions and the relative choice buttons
 function generateQuestion() {
-    
-    let questions = [
-        {
-            title: 'What character/ characters are used to surround the block of a function?',
-            choices: ['()', '!', '{}', '$'],
-            answer: '{Earth}'
-        },
-        {
-            title: 'What is used to print to the console??',
-            choices: ['var', 'function', 'i', 'console.log'],
-            answer: 'console.log'
-        },
-        {
-            title: 'What is a variable?',
-            choices: ['let', 'function', 'array', 'object'],
-            answer: 'let'
-        },
-        {
-            title: 'How do you commit changes in your terminal?',
-            choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
-            answer: 'git commit -m'
-        },
-        {
-            title: 'Which of the following is not a programming language?',
-            choices: ['spbl', 'css', 'javascript', 'html'],
-            answer: 'spbl'
-        },
-    ];
-        
         let currentQuestion = questions[questionIndex];
         if (!currentQuestion) {
-            clockTick();
+            startScreenEl.style.display = 'none';
+            questionZoneEl.style.display = 'none';
+            endScreenEl.style.display = '';
+            timeRemaining = 0;
+            
+
         }
     
         questionTitleEl.textContent = currentQuestion.title;
@@ -112,34 +91,6 @@ function generateQuestion() {
 
     // Function to check if user answer is correct or incorrect, then display if user answer is right or wrong
 function validateAnswer(event) {
-    
-    let questions = [
-        {
-            title: 'What character/ characters are used to surround the block of a function?',
-            choices: ['()', '!', '{}', '$'],
-            answer: '{Earth}'
-        },
-        {
-            title: 'What is used to print to the console??',
-            choices: ['var', 'function', 'i', 'console.log'],
-            answer: 'console.log'
-        },
-        {
-            title: 'What is a variable?',
-            choices: ['let', 'function', 'array', 'object'],
-            answer: 'let'
-        },
-        {
-            title: 'How do you commit changes in your terminal?',
-            choices: ['git commit -m', 'git status', 'touch', 'git push origin main'],
-            answer: 'git commit -m'
-        },
-        {
-            title: 'Which of the following is not a programming language?',
-            choices: ['spbl', 'css', 'javascript', 'html'],
-            answer: 'spbl'
-        },
-    ];
         // console.log(event.target.value);
         let userAnswer = event.target.value;
         let currentQuestion = questions[questionIndex];
@@ -152,9 +103,7 @@ function validateAnswer(event) {
             } else {
              let notRight = document.getElementById('is-it-correct');
              notRight.textContent = 'Previous Question: Incorrect';
-            
-             newTime = `Time: ${timeRemaining - 10}`;
-             currentTimeEl.textContent = newTime--;
+             timeRemaining -= 10;       
     }
     generateQuestion(questionIndex++);
     
